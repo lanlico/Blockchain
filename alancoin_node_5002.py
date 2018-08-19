@@ -131,7 +131,7 @@ def mine_block():
     #create a previous_hash
     previous_hash = blockchain.hash(previous_block)
     
-    blockchain.add_transaction(sender = node_address, receiver = 'Alan', amount = 1)
+    blockchain.add_transaction(sender = node_address, receiver = 'Vanessa', amount = 1)
     
     #invoke and create a new block after mining
     block = blockchain.create_block(proof, previous_hash)
@@ -168,7 +168,7 @@ def is_valid():
 @app.route('/add_transaction', methods=['POST'])
 def add_transaction():
     json = request.get_json()
-    transaction_keys = ['send','receiver','amount']
+    transaction_keys = ['sender','receiver','amount']
     if not all (key in json for key in transaction_keys):
         return 'Some elements of the transaction are missing', 400
     index = blockchain.add_transaction(json['sender'], json['receiver'], json['amount'])
@@ -204,4 +204,4 @@ def replace_chain():
     
 
 #Running the app
-app.run(host = '0.0.0.0', port = 5000)
+app.run(host = '0.0.0.0', port = 5002)
